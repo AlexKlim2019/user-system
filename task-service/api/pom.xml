@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.klymenko</groupId>
-        <artifactId>todo-service</artifactId>
+        <artifactId>task-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common</artifactId>
+    <artifactId>api</artifactId>
 
 </project>
