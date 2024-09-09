@@ -23,6 +23,7 @@ public class UserDomainServiceImpl implements UserDomainService {
 
     @Override
     public ValidateUserEvent validateUser(User user) {
+        user.validateUser();
         log.info("User with id: {} is validated successful", user.getId());
         return new ValidateUserEvent(user, LocalDateTime.now());
     }

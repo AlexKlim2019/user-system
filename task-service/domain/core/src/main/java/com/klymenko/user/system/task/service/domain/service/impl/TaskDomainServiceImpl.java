@@ -1,8 +1,9 @@
-package com.klymenko.user.system.task.service.domain.service;
+package com.klymenko.user.system.task.service.domain.service.impl;
 
 import com.klymenko.user.system.task.service.domain.entity.Task;
 import com.klymenko.user.system.task.service.domain.event.task.CreateTaskEvent;
 import com.klymenko.user.system.task.service.domain.event.task.ValidateTaskEvent;
+import com.klymenko.user.system.task.service.domain.service.TaskDomainService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class TaskDomainServiceImpl implements TaskDomainService {
 
     @Override
     public ValidateTaskEvent validateTask(Task task) {
+        task.validateTask();
         log.info("Task with id: {} is validated successful", task.getId());
         return new ValidateTaskEvent(task, LocalDateTime.now());
     }

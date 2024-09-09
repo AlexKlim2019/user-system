@@ -35,7 +35,7 @@ public class Task extends BaseEntity {
     }
 
     public void validateDescription() {
-        if (this.title.isBlank()) {
+        if (this.description.isBlank()) {
             throw new TaskDomainException("The description should not be empty");
         }
     }
