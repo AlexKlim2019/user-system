@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Component
 public class UserDaoMapper {
 
-    public UserEntity userToUserEntity(User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserEntity userToUserEntity(User user, LocalDateTime createdAt) {
         return UserEntity.builder()
                 .id(user.getId())
                 .email(user.getEmail())

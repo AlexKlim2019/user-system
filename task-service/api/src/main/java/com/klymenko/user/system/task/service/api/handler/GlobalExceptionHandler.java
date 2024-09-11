@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         var fieldErrors = exception.getBindingResult().getFieldErrors();
         var errorMessage = fieldErrors.isEmpty() ?
-                exception.getBindingResult().getAllErrors().get(0).getDefaultMessage() :
+                exception.getBindingResult().getAllErrors().getFirst().getDefaultMessage() :
                 extractViolationsFromException(fieldErrors);
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.getReasonPhrase())

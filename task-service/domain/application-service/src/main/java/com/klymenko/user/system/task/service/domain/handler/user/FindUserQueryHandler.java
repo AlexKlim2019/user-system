@@ -7,7 +7,6 @@ import com.klymenko.user.system.task.service.domain.port.output.repository.UserR
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -16,7 +15,6 @@ public class FindUserQueryHandler {
 
     private final UserRepository userRepository;
 
-    @Transactional
     public FindUserResponse handle(FindUserQuery query) {
         var user = userRepository.findById(query.id())
                 .orElseThrow(() -> new UserNotFoundException("User not found with given id!"));

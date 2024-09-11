@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user, LocalDateTime createdAt) {
-        var entity = mapper.userToUserEntity(user, createdAt, createdAt);
+        var entity = mapper.userToUserEntity(user, createdAt);
         var savedEntity = repository.save(entity);
         return mapper.userEntityToUser(savedEntity);
     }
