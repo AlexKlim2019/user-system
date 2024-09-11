@@ -13,7 +13,7 @@ public record CreateUserCommand(
         @Email(regexp = EMAIL_REGEX, message = "Email is not correct!")
         String email,
         @NotBlank(message = "Password is mandatory!")
-        @Size(min = 6, message = "The password should be at least 6 characters")
+        @Size(min = 6, message = "The password should be at least 6 characters!")
         String password,
         @NotBlank(message = "First name is mandatory!")
         String firstName,

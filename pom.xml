@@ -45,11 +45,6 @@
                 <artifactId>api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.klymenko</groupId>
-                <artifactId>common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
