@@ -13,6 +13,7 @@ public class Task extends BaseEntity {
         super.setId(builder.id);
         this.title = builder.title;
         this.description = builder.description;
+        this.userId = builder.userId;
     }
 
     public static Builder builder() {
@@ -68,6 +69,7 @@ public class Task extends BaseEntity {
         private UUID id;
         private String title;
         private String description;
+        private UUID userId;
 
         private Builder() {
         }
@@ -84,6 +86,11 @@ public class Task extends BaseEntity {
 
         public Builder description(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder userId(UUID userId) {
+            this.userId = userId;
             return this;
         }
 

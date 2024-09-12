@@ -4,13 +4,15 @@ import com.klymenko.user.system.task.service.domain.dto.command.task.PatchTaskCo
 import com.klymenko.user.system.task.service.domain.dto.response.task.PatchTaskResponse;
 import com.klymenko.user.system.task.service.domain.entity.Task;
 import com.klymenko.user.system.task.service.domain.event.task.ValidateTaskEvent;
-import com.klymenko.user.system.task.service.domain.exception.UserNotFoundException;
+import com.klymenko.user.system.task.service.domain.exception.TaskNotFoundException;
 import com.klymenko.user.system.task.service.domain.port.output.repository.TaskRepository;
 import com.klymenko.user.system.task.service.domain.service.TaskDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
@@ -23,11 +25,11 @@ public class PatchTaskCommandHandler {
     @Transactional
     public PatchTaskResponse handle(PatchTaskCommand command) {
         var task = repository.findById(command.id())
-                .orElseThrow(() -> new UserNotFoundException("Task not found with given id!"));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with given id!"));
         var updatedTask = partialUpdateTask(task, command);
         ValidateTaskEvent event = domainService.validateTask(updatedTask);
-        repository.update(updatedTask, event.getCreatedAt());
-        return new PatchTaskResponse(event.getTask(), "Task has been updated partially and successfully");
+        repository.update(updatedTask, event.getCreatedAt(), LocalDateTime.now());
+        return new PatchTaskResponse("Task has been updated partially and successfully");
     }
 
     private Task partialUpdateTask(Task task, PatchTaskCommand command) {

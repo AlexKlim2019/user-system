@@ -11,6 +11,7 @@ public class TaskDataMapper {
         return Task.builder()
                 .title(command.title())
                 .description(command.description())
+                .userId(command.userId())
                 .build();
     }
 }

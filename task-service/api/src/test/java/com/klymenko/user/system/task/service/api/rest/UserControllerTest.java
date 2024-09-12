@@ -2,6 +2,7 @@ package com.klymenko.user.system.task.service.api.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.klymenko.user.system.task.service.api.handler.GlobalExceptionHandler;
+import com.klymenko.user.system.task.service.domain.exception.UserDomainException;
 import com.klymenko.user.system.task.service.domain.port.input.service.UserApplicationService;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,7 @@ class UserControllerTest {
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
             given(service.saveUser(command)).willReturn(response);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -63,7 +64,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithoutEmail();
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -79,7 +80,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithInvalidEmail(invalidEmail);
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -94,7 +95,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithoutPassword();
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -110,7 +111,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithInvalidPassword(invalidPassword);
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -125,7 +126,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithoutFirstName();
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -140,7 +141,7 @@ class UserControllerTest {
             var bodyMap = generateCreateUserBodyMapWithoutLastName();
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())
@@ -151,13 +152,29 @@ class UserControllerTest {
         }
 
         @Test
+        void givenThrownUserDomainException_thenReturnBadRequestResponse() throws Exception {
+            var command = generateValidCreateUserCommand();
+            var bodyMap = generateCreateUserValidBodyMap();
+            var jsonBody = objectMapper.writeValueAsString(bodyMap);
+            given(service.saveUser(command)).willThrow(new UserDomainException("Could not save user!"));
+
+            mvc.perform(post("/api/users")
+                            .contentType(APPLICATION_JSON)
+                            .content(jsonBody))
+                    .andDo(print())
+                    .andExpect(status().isBadRequest())
+                    .andExpect(jsonPath("$.code").value(BAD_REQUEST_CODE))
+                    .andExpect(jsonPath("$.message").value("Could not save user!"));
+        }
+
+        @Test
         void givenThrownGeneralException_thenReturnInternalServerErrorResponse() throws Exception {
             var command = generateValidCreateUserCommand();
             var bodyMap = generateCreateUserValidBodyMap();
             var jsonBody = objectMapper.writeValueAsString(bodyMap);
             given(service.saveUser(command)).willThrow(new ArrayIndexOutOfBoundsException());
 
-            mvc.perform(post("/users")
+            mvc.perform(post("/api/users")
                             .contentType(APPLICATION_JSON)
                             .content(jsonBody))
                     .andDo(print())

@@ -67,4 +67,52 @@ public class BodyMapGenerator {
         }
 
     }
+
+    public static class CreateTaskPayloadGenerator {
+
+        public static Map<String, Object> generateCreateTaskValidBodyMap() {
+            return Map.of(
+                    "title", VALID_TITLE,
+                    "description", VALID_DESCRIPTION,
+                    "userId", USER_ID
+            );
+        }
+
+        public static Map<String, Object> generateCreateTaskBodyMapWithoutTitle() {
+            return Map.of(
+                    "description", VALID_DESCRIPTION,
+                    "userId", USER_ID
+            );
+        }
+
+        public static Map<String, Object> generateCreateTaskBodyMapWithoutDescription() {
+            return Map.of(
+                    "title", VALID_TITLE,
+                    "userId", USER_ID
+            );
+        }
+
+        public static Map<String, Object> generateCreateTaskBodyMapWithoutUserId() {
+            return Map.of(
+                    "title", VALID_TITLE,
+                    "description", VALID_DESCRIPTION
+            );
+        }
+
+        public static Map<String, Object> generateSearchTasksValidBodyMap() {
+            return Map.of("userId", USER_ID);
+        }
+
+        public static Map<String, Object> generatePatchTaskValidBodyMap() {
+            return Map.of(
+                    "id", TASK_ID,
+                    "title", UPDATED_TITLE,
+                    "description", UPDATED_DESCRIPTION
+            );
+        }
+
+        public static Map<String, Object> generateDeleteTaskValidBodyMap() {
+            return Map.of("id", TASK_ID);
+        }
+    }
 }

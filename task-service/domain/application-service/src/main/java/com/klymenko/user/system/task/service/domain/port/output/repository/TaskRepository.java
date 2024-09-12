@@ -12,7 +12,7 @@ public interface TaskRepository {
 
     Task save(Task user, LocalDateTime createdAt);
 
-    void update(Task user, LocalDateTime updatedAt);
+    void update(Task user, LocalDateTime createdAt, LocalDateTime updatedAt);
 
     Optional<Task> findById(UUID id);
 

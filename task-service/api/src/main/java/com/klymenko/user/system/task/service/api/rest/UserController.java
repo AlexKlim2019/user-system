@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/users", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/api/users", produces = "application/vnd.api.v1+json")
 public class UserController {
     private final UserApplicationService userApplicationService;
 

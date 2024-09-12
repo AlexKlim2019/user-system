@@ -3,7 +3,6 @@ package com.klymenko.user.system.task.service.dao.adapter;
 import com.klymenko.user.system.task.service.dao.mapper.TaskDaoMapper;
 import com.klymenko.user.system.task.service.dao.repository.TaskJpaRepository;
 import com.klymenko.user.system.task.service.domain.entity.Task;
-import com.klymenko.user.system.task.service.domain.exception.TaskNotFoundException;
 import com.klymenko.user.system.task.service.domain.port.output.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,10 +27,8 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public void update(Task task, LocalDateTime updatedAt) {
-        var existedEntity = repository.findById(task.getId())
-                .orElseThrow(() -> new TaskNotFoundException("Task not found with given id!"));
-        var entity = repository.save(mapper.taskToTaskEntity(task, existedEntity.getCreatedAt(), updatedAt));
+    public void update(Task task, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        var entity = repository.save(mapper.taskToTaskEntity(task, createdAt, updatedAt));
         repository.save(entity);
     }
 

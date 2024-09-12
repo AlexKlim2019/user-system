@@ -1,8 +1,8 @@
 package com.klymenko.user.system.task.service.api.handler;
 
 import com.klymenko.user.system.task.service.api.handler.response.ErrorResponse;
-import com.klymenko.user.system.task.service.domain.exception.UserDomainException;
-import com.klymenko.user.system.task.service.domain.exception.UserNotFoundException;
+import com.klymenko.user.system.task.service.domain.exception.DomainException;
+import com.klymenko.user.system.task.service.domain.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -49,8 +49,8 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {UserNotFoundException.class})
-    public ErrorResponse handleUserNotFoundException(UserNotFoundException exception) {
+    @ExceptionHandler(value = {NotFoundException.class})
+    public ErrorResponse handleNotFoundException(NotFoundException exception) {
         log.error(exception.getMessage(), exception);
         return ErrorResponse.builder()
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
@@ -60,8 +60,8 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {UserDomainException.class})
-    public ErrorResponse handleUserDomainException(UserDomainException exception) {
+    @ExceptionHandler(value = {DomainException.class})
+    public ErrorResponse handleUserDomainException(DomainException exception) {
         log.error(exception.getMessage(), exception);
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
