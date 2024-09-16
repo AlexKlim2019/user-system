@@ -7,18 +7,19 @@ import java.util.UUID;
 
 @Slf4j
 public class User extends BaseEntity {
-
     private String email;
-    private String password;
+    private String passwordHash;
     private String firstName;
     private String lastName;
+    private UserRole role;
 
     public User(Builder builder) {
         super.setId(builder.id);
         this.email = builder.email;
-        this.password = builder.password;
+        this.passwordHash = builder.passwordHash;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
+        this.role = builder.role;
     }
 
     public static Builder builder() {
@@ -46,11 +47,11 @@ public class User extends BaseEntity {
     }
 
     private void validatePassword() {
-        if (this.password.isBlank()) {
+        if (this.passwordHash.isBlank()) {
             throw new UserDomainException("The password should not be empty");
         }
 
-        if (this.password.length() < 6) {
+        if (this.passwordHash.length() < 6) {
             throw new UserDomainException("The password should be at least 6 characters");
         }
     }
@@ -71,47 +72,44 @@ public class User extends BaseEntity {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public UserRole getRole() {
+        return role;
     }
-
 
     public static final class Builder {
         private UUID id;
         private String email;
-        private String password;
+        public UserRole role;
         private String firstName;
         private String lastName;
+        private String passwordHash;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder id(UUID id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder passwordHash(String passwordHash) {
+            this.passwordHash = passwordHash;
             return this;
         }
 
@@ -125,13 +123,8 @@ public class User extends BaseEntity {
             return this;
         }
 
-        public Builder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
+        public Builder role(UserRole role) {
+            this.role = role;
             return this;
         }
 

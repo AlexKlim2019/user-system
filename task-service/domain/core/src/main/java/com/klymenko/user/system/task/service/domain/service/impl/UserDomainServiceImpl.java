@@ -5,6 +5,7 @@ import com.klymenko.user.system.task.service.domain.event.user.CreateUserEvent;
 import com.klymenko.user.system.task.service.domain.event.user.ValidateUserEvent;
 import com.klymenko.user.system.task.service.domain.service.UserDomainService;
 import lombok.extern.slf4j.Slf4j;
+
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -22,9 +23,9 @@ public class UserDomainServiceImpl implements UserDomainService {
     }
 
     @Override
-    public ValidateUserEvent validateUser(User user) {
+    public void validateUser(User user) {
         user.validateUser();
         log.info("User with id: {} is validated successful", user.getId());
-        return new ValidateUserEvent(user, LocalDateTime.now());
+        new ValidateUserEvent(user, LocalDateTime.now());
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(UUID id) {
-        return repository.findById(id).map(mapper::userEntityToUser);
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email).map(mapper::userEntityToUser);
     }
 }

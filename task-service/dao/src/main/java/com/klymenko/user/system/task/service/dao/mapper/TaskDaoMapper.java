@@ -14,6 +14,7 @@ public class TaskDaoMapper {
                 .id(task.getId())
                 .title(task.getTitle())
                 .description(task.getDescription())
+                .userId(task.getUserId())
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .build();
@@ -24,6 +25,7 @@ public class TaskDaoMapper {
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .description(entity.getDescription())
+                .userId(entity.getUserId())
                 .build();
     }
 }

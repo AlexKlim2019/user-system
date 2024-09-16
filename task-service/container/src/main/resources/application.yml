@@ -19,3 +19,6 @@ spring:
   h2:
     console:
       enabled: true
+
+jwt:
+  ttl: ${JWT_TTL:PT24H}

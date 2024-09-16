@@ -19,6 +19,7 @@
         <module>dao</module>
         <module>api</module>
         <module>container</module>
+        <module>auth</module>
     </modules>
 
     <dependencies>

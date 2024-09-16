@@ -1,9 +1,7 @@
 package com.klymenko.user.system.task.service.dao.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.klymenko.user.system.task.service.domain.entity.UserRole;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +23,14 @@ public class UserEntity {
     @Column
     private String email;
     @Column
-    private String password;
+    private String passwordHash;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    @Column
+    private UserRole role;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

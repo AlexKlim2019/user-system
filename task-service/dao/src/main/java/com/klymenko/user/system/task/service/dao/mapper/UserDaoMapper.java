@@ -13,9 +13,10 @@ public class UserDaoMapper {
         return UserEntity.builder()
                 .id(user.getId())
                 .email(user.getEmail())
-                .password(user.getPassword())
+                .passwordHash(user.getPasswordHash())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .role(user.getRole())
                 .createdAt(createdAt)
                 .build();
     }
@@ -24,9 +25,10 @@ public class UserDaoMapper {
         return User.builder()
                 .id(entity.getId())
                 .email(entity.getEmail())
-                .password(entity.getPassword())
+                .passwordHash(entity.getPasswordHash())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
+                .role(entity.getRole())
                 .build();
     }
 }

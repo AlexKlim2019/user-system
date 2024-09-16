@@ -1,4 +1,4 @@
-package com.klymenko.user.system.task.service.domain;
+package com.klymenko.user.system.task.service.domain.config;
 
 import com.klymenko.user.system.task.service.domain.service.TaskDomainService;
 import com.klymenko.user.system.task.service.domain.service.UserDomainService;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeanConfiguration {
+public class DomainBeanConfig {
 
     @Bean
     public UserDomainService userDomainService() {

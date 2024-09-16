@@ -7,7 +7,7 @@ import static com.klymenko.user.system.task.service.api.utils.TestConstants.*;
 public class BodyMapGenerator {
     public static class CreateUserPayloadGenerator {
 
-        public static Map<String, Object> generateCreateUserValidBodyMap() {
+        public static Map<String, Object> generateSignUpUserValidBodyMap() {
             return Map.of(
                     "email", VALID_EMAIL,
                     "password", VALID_PASSWORD,

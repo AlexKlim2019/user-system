@@ -23,7 +23,7 @@ public class TaskController {
     private final TaskApplicationService taskApplicationService;
 
     @PostMapping
-    public ResponseEntity<CreateTaskResponse> registerUser(@Valid @RequestBody CreateTaskCommand command) {
+    public ResponseEntity<CreateTaskResponse> saveTask(@Valid @RequestBody CreateTaskCommand command) {
         log.info("Task with title {} is being created...", command.title());
         var response = taskApplicationService.saveTask(command);
         log.info("Task with id {} has been created", response.task().getId());
