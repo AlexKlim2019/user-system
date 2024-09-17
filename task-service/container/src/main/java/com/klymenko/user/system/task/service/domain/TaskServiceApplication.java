@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = {"com.klymenko.user.system.task.service.dao"})
 @EntityScan(basePackages = {"com.klymenko.user.system.task.service.dao"})
 @SpringBootApplication(scanBasePackages = "com.klymenko.user.system")
-public class UserServiceApplication {
+public class TaskServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApplication.class);
+        SpringApplication.run(TaskServiceApplication.class);
     }
 }
